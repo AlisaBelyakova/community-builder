@@ -50,18 +50,94 @@
   background-repeat: no-repeat;
   background-position: center; 
 }
+.people {
+  padding: 25% 8% 0 8% ;
+}
 
 #main {
-  background-color: #95BC35
+  background-color: #34A853;
 }
 
 .sidebar-btn {
-  background-color: rgb(112, 139, 208);
-  margin: 20px 0;;
+  background-color: #4285F4;
+  margin: 5% 0;;
   display: block;
   height: 30px;
   width: 150px;
   border-radius: 5px;
   font-size: 18px;
   border: none;
+}
+
+/* --------------------------------------- avatar */
+
+
+
+.activate {
+  background-color: red !important;
+}
+
+/* .c5 {
+  width: 120px;;
+  height: 120px;
+  background-color: rgb(52, 168, 83);
+} */
+
+.c4 {
+  width: 120px;
+  height: 120px;
+  background-color: rgb(56, 160, 120);
+}
+
+.c3 {
+  width: 100px;
+  height: 100px;
+  background-color: rgb(60, 150, 160);
+}
+
+.c2 {
+  width: 100px;
+  height: 100px;
+  background-color: rgb(60, 140, 200);
+  position: relative;
+  top: -5px;
+  left: -5px;
+}
+
+.c1 {
+  width: 80px;
+  height: 80px;
+  background-color: rgb(66, 133, 244);
+}
+
+
+.node {
+  /* width: 130px;
+  height: 130px; */
+  display: inline-block;
+  border-radius: 100%;
+  margin: 10px 10px;
+  box-shadow: 1px 1px 1px white;
+}
+
+.node h5  {
+  margin: 0;
+}
+
+
+.avatar {
+
+  width: 50px;
+  height: 50px ;
+  border-radius: 100%;
+}
+
+#coin {
+  background-color: #FBBC05;
+  border: 2px solid black;
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  visibility: hidden;
+  box-shadow: 5px 3px 10px;
 }
