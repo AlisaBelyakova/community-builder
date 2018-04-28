@@ -1,0 +1,67 @@
+.App {
+  background-color: #222;
+  text-align: center;
+  height: 100vh;
+
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 100vh;;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 10s linear;
+  height: 90px;
+  display: inline-block;
+  margin: 10px;
+}
+
+.App-sidebar {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+
+  background-color: #222;
+  height: 50px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 2em;
+  display: inline-block;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ------------------------------------ body  */
+
+.App-content {
+  text-align: center;
+  height: 100%;
+  background-image: url("https://images.unsplash.com/photo-1521330376889-088f238e793b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3df50c816fef0dfc510cc0468038a8f8&auto=format&fit=crop&w=1350&q=80");
+  background-repeat: no-repeat;
+  background-position: center; 
+}
+
+#main {
+  background-color: #95BC35
+}
+
+.sidebar-btn {
+  background-color: rgb(112, 139, 208);
+  margin: 20px 0;;
+  display: block;
+  height: 30px;
+  width: 150px;
+  border-radius: 5px;
+  font-size: 18px;
+  border: none;
+}
