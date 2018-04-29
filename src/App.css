@@ -1,11 +1,12 @@
 .App {
+  font-family: 'Tajawal', sans-serif;
   background-color: #222;
   text-align: center;
   height: 100vh;
 
   display: grid;
   grid-template-columns: 20% 80%;
-  grid-template-rows: 100vh;;
+  grid-template-rows: 100vh;
 }
 
 .App-logo {
@@ -16,6 +17,7 @@
 }
 
 .App-sidebar {
+  text-align: center;
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 1;
@@ -30,6 +32,7 @@
 .App-title {
   font-size: 2em;
   display: inline-block;
+  margin: 0 ;
 }
 
 .App-intro {
@@ -44,60 +47,73 @@
 /* ------------------------------------ body  */
 
 .App-content {
-  text-align: center;
-  height: 100%;
-  background-image: url("https://images.unsplash.com/photo-1521330376889-088f238e793b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3df50c816fef0dfc510cc0468038a8f8&auto=format&fit=crop&w=1350&q=80");
+  height: 100vh;
+  background-size: contain;
+  background-image: url("https://fertilizercanada.ca/wp-content/uploads/2017/06/handsholdingplants.jpg");
   background-repeat: no-repeat;
   background-position: center; 
-}
-.people {
-  padding: 25% 8% 0 8% ;
+
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 15% 70% 15%;
 }
 
+.people {
+  padding: 0 3vh;
+  align-self: center;
+  grid-column-start: 1;
+  grid-column-end: span 1;
+  grid-row-start: 2;
+  grid-row-end: span 1;
+}
+ 
 #main {
   background-color: #34A853;
+  height: 60px;
 }
 
 .sidebar-btn {
+  font-family: 'Tajawal', sans-serif;
   background-color: #4285F4;
-  margin: 5% 0;;
+  margin: 5% auto;
   display: block;
   height: 30px;
   width: 150px;
   border-radius: 5px;
   font-size: 18px;
   border: none;
+
+}
+.sidebar-btn:focus {outline:0;}
+.sidebar-btn:active {
+  border: none;
+  box-shadow: -3px 3px 5px rgba(5, 0, 0, 0.822);
+  transform: translateY(4px);
 }
 
 /* --------------------------------------- avatar */
-
 
 
 .activate {
   background-color: red !important;
 }
 
-/* .c5 {
-  width: 120px;;
-  height: 120px;
-  background-color: rgb(52, 168, 83);
-} */
 
 .c4 {
-  width: 120px;
-  height: 120px;
+  width: 13vh;
+  height: 13vh;
   background-color: rgb(56, 160, 120);
 }
 
 .c3 {
-  width: 100px;
-  height: 100px;
+  width: 12vh;
+  height: 12vh;
   background-color: rgb(60, 150, 160);
 }
 
 .c2 {
-  width: 100px;
-  height: 100px;
+  width: 11vh;
+  height: 11vh;
   background-color: rgb(60, 140, 200);
   position: relative;
   top: -5px;
@@ -105,19 +121,18 @@
 }
 
 .c1 {
-  width: 80px;
-  height: 80px;
+  width: 10vh ;
+  height: 10vh;
   background-color: rgb(66, 133, 244);
 }
 
 
 .node {
-  /* width: 130px;
-  height: 130px; */
   display: inline-block;
   border-radius: 100%;
-  margin: 10px 10px;
-  box-shadow: 1px 1px 1px white;
+  margin: 1vh;
+  box-shadow: 2px 2px 1px white;
+  border: 1px solid white;
 }
 
 .node h5  {
@@ -126,18 +141,54 @@
 
 
 .avatar {
-
-  width: 50px;
-  height: 50px ;
+  width: 7vh;
+  height: 7vh;
   border-radius: 100%;
 }
 
 #coin {
-  background-color: #FBBC05;
-  border: 2px solid black;
-  height: 40px;
-  width: 40px;
-  border-radius: 100%;
   visibility: hidden;
+}
+
+#coin p {
+  height: 7vh;
+  width: 7vh;
+  font-size: 5vh;
+  background-color: white;
+  border-radius: 100%;
   box-shadow: 5px 3px 10px;
+}
+
+/* ---------------------------------- agencies */
+.city {
+  grid-column-start: 1;
+  grid-column-end: span 1;
+  grid-row-start: 3;
+  grid-row-end: span 1;
+}
+.pictogram {
+  margin: 5px;
+  height: 8vh;
+  width: 8vh;
+  border-radius: 1vh;
+  background-color: white;
+  border: 3px solid #222;
+  padding: 10px;
+}
+
+/* ----------------------------------------- banner */
+.banner {
+  padding: 3vw 10vw 0 10vw;
+  grid-column-start: 1;
+  grid-column-end: span 1;
+  grid-row-start: 2;
+  grid-row-end: span 1;
+}
+
+.banner p {
+  font-weight: bold;
+  border-radius: 3vw;
+  padding: 5vw;
+  background-color: rgba(255, 255, 255, 0.7);
+  font-size: 2.5vh;
 }
