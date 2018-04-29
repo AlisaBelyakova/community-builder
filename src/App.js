@@ -27,35 +27,149 @@ class App extends Component {
       names : community,
       wallets: community.map( () => getRandomInt(250, 2500) ),
       avatars: community.map( () => toonAvatar.generate_avatar() ),
+
       bannerVisible: true, 
-      peopleVisible:false,
+      createVisible: false,
+      voteVisible: false, 
+      exchangeVisible:false,
+      monitorVisible: false,
+
+      monitorButton: false, 
+      exchangeButton : false,
+      voteButton: false, 
+
 
     }
 
     this.handleInteraction = this.handleInteraction.bind(this);
-    this.handleKeyUp = this.handleKeyUp.bind(this);
-    this.handleCitizens  = this.handleCitizens.bind(this);
-
+    this.handleCreate = this.handleCreate.bind(this);
+    this.handleVote = this.handleVote.bind(this);
   } 
 
-  handleCitizens() {
-    this.setState({peopleVisible: !this.state.peopleVisible,
-      bannerVisible: false })
-      document.getElementsByClassName('show-people-btn')[0].innerHTML = this.state.peopleVisible ?  'show citizens' : 'hide citizens';
+  handleVote (e) {
+    e.target.classList.remove('main-btn')
+    this.setState({voteVisible: true});
+    window.setTimeout( () => {
+
+      let voteBox = document.getElementById('vote-box');
+      let start;
+      for (var i=0; i< 18; i++ ){
+        let newSpan = document.createElement("p");
+        newSpan.innerHTML = '📃';
+        voteBox.appendChild(newSpan);
+        newSpan.classList.add('vote-paper');
+
+        start = document.getElementById('contract-item').getBoundingClientRect();
+        newSpan.style.position = 'absolute';
+        newSpan.style.top = start.top+'px';
+        newSpan.style.left = start.left+'px';
+      }
+
+      let polls = Array.from(document.getElementsByClassName('vote-paper'))
+      let whoVote = Array.from(document.getElementsByClassName('node'))
+
+      for (let i=0;i<18;i++) {
+        let curPoll = polls[i], whom = whoVote[i];
+        let target = whom.getBoundingClientRect();
+        curPoll.style.transition= 'all '+ 1 +'s';
+        curPoll.style.left = (target.left)+'px';
+        curPoll.style.top = (target.top)  +'px';
+      }
+
+      window.setTimeout(()=> {
+        for (let i=0;i<18;i++) {
+          let curPoll = polls[i];
+          curPoll.innerHTML = i === 5 || i===8 || i===12 || i ===15 ? '🅾️' : '✅' ;
+        }
+      }, 1300)
+
+      window.setTimeout(()=> {
+        for (let i=0;i<18;i++) {
+          let curPoll = polls[i], whom = whoVote[i];
+          let target = whom.getBoundingClientRect();
+          curPoll.style.transition= 'all '+ 0.8 +'s';
+          curPoll.style.top = start.top+'px';
+          curPoll.style.left = start.left+'px';
+        }
+        this.setState({exchangeButton: true })
+        document.getElementById('exchange-btn').classList.add('main-btn')
+      }, 3000)
+
+
+    }, 10)
   }
 
-  handleKeyUp(event) {
-    if (event.which == 13) {
-      this.handleInteraction();
-    }
+  handleCreate () {
+    this.setState({createVisible: true, bannerVisible: false });
+    Array.from(document.getElementsByClassName('main-btn'))[0].classList.remove('main-btn')
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min) + min)
+    } 
+
+    let items = ['📚 🖌 description of item', '💰💎  description of item', '☀️ ❄️ description of item', '🌍 ☘️ description of item', '🍎🥕 description of item', '🛠 🚒 description of item ', '💊 ⚖️ description of item' , '💐 🔑 description of item' , '✈️ 🚕  description of item' , '🎭 🎯 description of item']
+
+    let count = 0;
+    window.setTimeout( () => {
+      let target = document.getElementById('contract-item').getBoundingClientRect(); 
+      let issuesEmit = setInterval(() => {
+        let item = items[count]; count++;
+        if(!item) item = '📚 🖌 description of item';
+        let person = document.getElementById(getRandomInt(0,17).toString())
+        let start = person.getBoundingClientRect();  
+        let curissue = document.getElementById('issue')
+
+        person.classList.add('activate');
+
+        curissue.innerHTML = item;
+        curissue.style.position = 'absolute'
+        curissue.style.left = start.left +'px'; 
+        curissue.style.top = start.top  +'px'; 
+        curissue.style.visibility = 'visible';
+        
+        
+        setTimeout(() => {
+          curissue.style.transition= 'all '+ 0.8 +'s';
+          curissue.style.left = (target.left)+'px';
+          curissue.style.top = (target.top)  +'px';
+        }, 80)
+
+
+        setTimeout(()=> {
+          curissue.style.visibility = 'hidden';
+          person.classList.remove('activate');
+          curissue.style.transition = '';
+          curissue.innerHTML = '';
+
+          let testarea = document.getElementById('text-field');
+          testarea.value = item +'\n'+ testarea.value;
+        }, 900)
+
+      }, 1000)
+
+      window.setTimeout( () => {
+        window.clearInterval(issuesEmit)
+        this.setState({voteButton: true})
+        document.getElementById('vote-btn').classList.add('main-btn')
+        console.log('DONE!')
+        return;
+      }, 10000)
+
+      } , 10)
+
   }
 
   handleInteraction () {
 
+    this.setState({exchangeVisible: true , voteVisible: false, createVisible:false})
+
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min) + min)
     }
-    let simulatePeople = setInterval( () =>  {
+
+    var simulatePeople;
+
+    window.setTimeout(() => {
+    simulatePeople = setInterval( () =>  {
       //--------------------------------------------------  INTERACTION
       const wallets = this.state.wallets;
       let personFrom = getRandomInt(0, wallets.length-1);
@@ -92,15 +206,15 @@ class App extends Component {
 
       emoji.innerHTML = sendItem;
       coin.style.position = "absolute";
-      coin.style.left = (positionFrom.left+positionFrom.width*0.3)+'px';
-      coin.style.top = (positionFrom.top+positionFrom.height*0.3)  +'px';
+      coin.style.left = (positionFrom.left)+'px'; 
+      coin.style.top = (positionFrom.top)  +'px'; 
       coin.style.visibility = 'visible';
       
       setTimeout(() => {
         coin.style.transition= 'all '+ 1 +'s';
         coin.style.position = "absolute";
-        coin.style.left = (positionTo.left+positionTo.width*0.3)+'px';
-        coin.style.top = (positionTo.top+positionTo.height*0.3)  +'px';
+        coin.style.left = (positionTo.left)+'px';
+        coin.style.top = (positionTo.top)  +'px';
       }, 50)
       
       setTimeout(() => {
@@ -111,10 +225,14 @@ class App extends Component {
 
     }, 2000)
 
+    },300)
+
     window.setTimeout(()=> {
       clearInterval(simulatePeople);
-    }, 20000)
-
+      this.setState({monitorButton: true});
+      document.getElementById('log-btn').classList.add('main-btn');
+      document.getElementById('exchange-btn').classList.remove('main-btn');
+    }, 22000)
 
   }
 
@@ -140,6 +258,29 @@ class App extends Component {
           )
         })
 
+    let mapContractFirst = this.state.wallets.map( (amount, i ) => {
+      if (i>8) return;
+      let className = classGenerator(amount);
+      return (
+        <div className={className} id={i} key={i}> 
+          <img src={this.state.avatars[i]} className="avatar"/>
+          <h5> {this.state.names[i]} </h5>
+        </div> 
+      )
+      })
+    let mapContractSecond = this.state.wallets.map( (amount, i ) => {
+      if (i<9) return;
+      if (i>17) return;
+      let className = classGenerator(amount);
+      return (
+        <div className={className} id={i} key={i}> 
+          <img src={this.state.avatars[i]} className="avatar"/>
+          <h5> {this.state.names[i]} </h5>
+        </div> 
+      )
+      })
+    
+      
     return (
       <div className="App">
 
@@ -148,24 +289,57 @@ class App extends Component {
           <h1 className="App-title"> One Neighborhood <br/> New Community</h1>
           <p>by the people for the people</p>
 
-          <button onClick={this.handleCitizens} className='show-people-btn sidebar-btn'>show citizens</button>
-          <button onClick={() => console.log('under construction')} className='show-contract-btn sidebar-btn'>show contract</button>
+          <button 
+              className='sidebar-btn main-btn' 
+              id='sign-btn'                     
+              onClick={this.handleCreate}        
+              > create social contract </button>
+
+          { this.state.voteButton
+          && <button 
+              className='sidebar-btn' 
+              id='vote-btn'
+              onClick={this.handleVote}   
+              > vote and deploy </button>}
+          { this.state.exchangeButton
+          && <button 
+              className='sidebar-btn' 
+              id='exchange-btn' 
+              onClick={this.handleInteraction} 
+              > exchange goods and services </button>}
+          { this.state.monitorButton
+          && <button 
+              className='sidebar-btn' 
+              id = 'log-btn'    
+              > monitor the log of activities </button>}
+
               <br/><br/>
 
-          {this.state.peopleVisible 
-              && <button className="sidebar-btn" id="main" 
-                onClick={this.handleInteraction} 
-                onKeyUp={this.handleKeyUp}>simulate</button>} 
         </nav>
 
         
         
         <div className="App-content">
 
-          {this.state.peopleVisible 
-            && <span className='people'> 
-                {mapPeople} 
-                <span id='coin'><p id='emoji'></p></span>
+
+        { this.state.voteVisible
+          && <span id = 'vote-box' > </span>
+          }
+
+        {this.state.exchangeVisible 
+          && <span className='people'> 
+              {mapPeople} 
+              <span id='coin'><p id='emoji'></p></span>
+            </span>}
+
+          {this.state.createVisible
+            && <span className='create-contract-page'> 
+                  <span className='first-half'>  {mapContractFirst} </span> <br />
+                  <span className='contract-item' id='contract-item'> 
+                      <textarea id = 'text-field' rows ='24' cols ='1' placeholder="Create  Smart  Social  contract  for  your  community by declaring values your hold and defining principles of daily interactions... "> 
+                      </textarea> </span> <br />
+                  <span className='second-half'> {mapContractSecond} </span>
+                  <span><p id='issue'></p></span>
               </span>}
 
           {this.state.bannerVisible 

@@ -1,3 +1,7 @@
+body {
+  box-sizing: border-box;
+}
+
 .App {
   font-family: 'Tajawal', sans-serif;
   background-color: #222;
@@ -30,7 +34,7 @@
 }
 
 .App-title {
-  font-size: 2em;
+  font-size: 1em;
   display: inline-block;
   margin: 0 ;
 }
@@ -54,7 +58,7 @@
   background-position: center; 
 
   display: grid;
-  grid-template-columns: 100%;
+  grid-template-columns: 100%; /* <======================================== GRID HERE  */
   grid-template-rows: 15% 70% 15%;
 }
 
@@ -67,22 +71,22 @@
   grid-row-end: span 1;
 }
  
-#main {
-  background-color: #34A853;
+.main-btn {
+  background-color: #4285F4 !important;
   height: 60px;
 }
 
 .sidebar-btn {
+  /* font-weight: bold; */
   font-family: 'Tajawal', sans-serif;
-  background-color: #4285F4;
-  margin: 5% auto;
+  background-color: #34A853;
+  margin: 1% auto;
   display: block;
-  height: 30px;
-  width: 150px;
+  height: 60px;
+  width: 200px;
   border-radius: 5px;
   font-size: 18px;
   border: none;
-
 }
 .sidebar-btn:focus {outline:0;}
 .sidebar-btn:active {
@@ -91,11 +95,20 @@
   transform: translateY(4px);
 }
 
+.sidebar-btn:disabled {
+  font-weight: lighter;
+  background-color: #4285F4;
+  color: rgb(75, 75, 75)
+}
+
+
+
+
 /* --------------------------------------- avatar */
 
 
 .activate {
-  background-color: red !important;
+  background-color: #EA4335 !important;
 }
 
 
@@ -153,10 +166,11 @@
 #coin p {
   height: 7vh;
   width: 7vh;
-  font-size: 5vh;
-  background-color: white;
+  font-size: 10vh;
+  /* background-color: rgba(255, 255, 255, 0.5); */
   border-radius: 100%;
-  box-shadow: 5px 3px 10px;
+  text-shadow: 7px 7px 3px black;
+  /* box-shadow: 5px 3px 10px; */
 }
 
 /* ---------------------------------- agencies */
@@ -191,4 +205,65 @@
   padding: 5vw;
   background-color: rgba(255, 255, 255, 0.7);
   font-size: 2.5vh;
+}
+
+/* --------------------------------------------- create contract */
+.create-contract-page {
+  padding: 0 5vh;
+
+  display: inline-grid;
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
+
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: 100%;
+}
+
+.first-half {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+}
+
+.contract-item {
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 1;
+} 
+
+.second-half {
+  grid-column: 3 / span 1;
+  grid-row: 1 / span 1;
+}
+
+.contract-item textarea {
+  /* font-style: italic; */
+  text-shadow: 2px 2px white;
+  background-color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  width: 80%;
+  height: 80%;
+  border-radius: 5%;
+  padding: 5%  2%;
+  font-size: 2vh;
+  line-height: 5vh;
+} 
+
+.contract-item textarea:focus {outline:0;}
+
+#issue {
+  padding: 1%;
+  z-index: 10;
+  background-color: white;
+  box-shadow: 2px 2px 5px black;
+  border-radius: 4px;
+  visibility: hidden;
+}
+
+/* -------------------------------------------------- vote  */
+.vote-paper {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  font-size: 8vh;
+  text-shadow: 2px 2px 3px black;
+  z-index: 11;
 }
