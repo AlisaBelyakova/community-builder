@@ -271,24 +271,25 @@ body {
   border: 10px solid black;
   z-index: 5;
   position: relative;
-  top: -60%;
-  height: 40%;
-  width: 66%;
+  top: -55%;
+  height: 36%;
+  width: 65%;
   margin: 0;
   opacity: 0.60;
 }
 
-#coding-trade {
-  border: 10px solid black;
+.coding-trade {
+  border: 5px solid black;
   display: inline-block;
   z-index: 5;
   position: relative;
   top: 15%;
-  left: -45%;
-  height: 10%;
-  width: 10%;
-  margin: 0;
-  opacity: 0.80;
+  /* left: -45%; */
+  height: 12vh;
+  width: 8vh;
+  margin: 0 0.5%;
+  opacity: 0.90;
+  box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.657);
 }
 /* -------------------------------------------------- vote  */
 .vote-paper {
@@ -310,6 +311,12 @@ body {
 
 #eth-log {
   opacity: 0.95;
-  width: 50vw;
+  width: 60vw;
   border-radius: 3%;
+}
+
+
+#join-btn {
+    font-weight: bold;
+    color: black;
 }

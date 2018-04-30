@@ -41,9 +41,11 @@ class App extends Component {
   } 
 
   handleStatistics() {
-    this.setState({joinButton: true, monitorVisible: true, exchangeVisible: false})
-    document.getElementById('log-btn').classList.remove('main-btn');
-    document.getElementById('join-btn').classList.remove('main-btn')
+    this.setState({joinButton: true, monitorVisible: true, exchangeVisible: false});
+    window.setTimeout(()=> {
+      document.getElementById('log-btn').classList.remove('main-btn');
+      document.getElementById('join-btn').classList.add('main-btn')
+    },100)
   }
 
 
@@ -204,7 +206,14 @@ class App extends Component {
       
       window.setTimeout(function () {
         fromGuy.classList.remove('activate')
-        toGuy.classList.remove('activate')
+        toGuy.classList.remove('activate');
+        let newNode = document.createElement('img')
+        newNode.src = 'https://i.giphy.com/media/3oEjHWbXcpeKhTktXi/giphy.webp'; 
+        newNode.classList.add('coding-trade')
+        let parentNode = document.getElementById('people');
+        parentNode.lastChild.src = 'https://i.ytimg.com/vi/Tcwl1uyq1XY/maxresdefault.jpg';
+        parentNode.appendChild(newNode)
+
       }, 1000)
 
       emoji.innerHTML = sendItem;
@@ -325,7 +334,7 @@ class App extends Component {
             && <button 
                 className='sidebar-btn' 
                 id = 'join-btn'    
-                > join your community </button>}
+                > ✔️ sign social contract - join One Community </button>}
 
         </nav>
 
@@ -347,11 +356,11 @@ class App extends Component {
           }
 
         {this.state.exchangeVisible 
-          && <span className='people'> 
+          && <span className='people' id='people'> 
               {mapPeople} 
               <span id='coin'><p id='emoji'></p></span>
               <br/>
-              <img src='https://i.giphy.com/media/3oEjHWbXcpeKhTktXi/giphy.webp' id='coding-trade'/>
+              <img src='https://i.giphy.com/media/3oEjHWbXcpeKhTktXi/giphy.webp' className='coding-trade'/>
             </span>}
 
           {this.state.createVisible
@@ -361,7 +370,7 @@ class App extends Component {
                         <textarea id = 'text-field' rows ='24' cols ='1' placeholder="Create  Smart  Social  contract  for  your  community by declaring values your hold and defining principles of daily interactions... "> 
                         </textarea> 
                         {/*  <img src='https://i.giphy.com/media/aQCCNezRpb9Hq/giphy.webp' id='coding'/> */}
-                        <img src='https://i.giphy.com/media/3oEjHWbXcpeKhTktXi/giphy.webp' id='coding-contract'/>
+                        <img src='https://i.giphy.com/media/3oEjHWbXcpeKhTktXi/giphy.webp' id='coding-contract'/> 
                   </span>
                   <br />
                   <span className='second-half'> {mapContractSecond} </span>
@@ -370,10 +379,9 @@ class App extends Component {
 
           {this.state.bannerVisible 
             && <span className='banner'> 
-                <p> New world project aims to adopt blockchain and smart contract technologies for community building on the local and global scale. 
+                <p> New World One Community project aims to adopt blockchain and smart contract technologies for community building on the local and global scale. 
                 <br/><br/>By making peer to peer interactions and dealings secure and transparent the participants lead their community with trust and efficacy, outreach and help people around the globe to launch their local initiatives. 
-                <br/>Today smart contracts allow for mutually beneficial transactions and chart the way to new democracy. 
-                <br/><br/>Distributed technologies will help communities to build <br/>humanistic societies - E Pluribus Unum.
+                <br/><br/>Today smart contracts help communities to build democracy and humanistic societies - E Pluribus Unum Nuovo.
                 </p>
               </span>}
         
