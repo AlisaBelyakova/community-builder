@@ -34,7 +34,7 @@ body {
 }
 
 .App-title {
-  font-size: 1em;
+  font-size: 1.5vw;
   display: inline-block;
   margin: 0 ;
 }
@@ -48,6 +48,10 @@ body {
   to { transform: rotate(360deg); }
 }
 
+.by-the-people {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.623);
+}
 /* ------------------------------------ body  */
 
 .App-content {
@@ -63,12 +67,12 @@ body {
 }
 
 .people {
-  padding: 0 3vh;
-  align-self: center;
-  grid-column-start: 1;
-  grid-column-end: span 1;
   grid-row-start: 2;
   grid-row-end: span 1;
+  grid-column-start: 1;
+  grid-column-end: span 1;
+  padding: 1% 10%;
+  align-self: center;
 }
  
 .main-btn {
@@ -204,7 +208,7 @@ body {
   border-radius: 3vw;
   padding: 5vw;
   background-color: rgba(255, 255, 255, 0.7);
-  font-size: 2.5vh;
+  font-size: 3vh;
 }
 
 /* --------------------------------------------- create contract */
@@ -263,7 +267,16 @@ body {
   position: fixed;
   top: 10%;
   left: 50%;
-  font-size: 8vh;
+  font-size: 5vh;
   text-shadow: 2px 2px 3px black;
   z-index: 11;
+}
+
+#chart {
+  z-index: 12;
+  position: absolute;
+  top: 30vh;
+  left: 30vw;
+  height: 100%;
+  width: 100%;
 }

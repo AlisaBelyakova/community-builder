@@ -20,7 +20,7 @@ class App extends Component {
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min) + min);
     }
-    const community = [ 'Emma', 'Olivia', 'Ava', 'Sophia', 'Isabella', 'Mia', 'Charlotte', 'Abigail', 'Emily', 'Harper', 'Amelia', 'Evelyn', 'Elizabeth', 'Sofia', 'Madison', 'Connor', 'Josiah', 'Jonathan'  , 'Cameron', 'Jeremiah', 'Mateo', 'Adrian', 'Hudson', 'Robert', 'Nicholas', 'Brayden', 'Nolan', 'Easton' ] //, 'Jordan', 'Colton']
+    const community = [ 'Emma', 'Olivia', 'Ava', 'Sophia', 'Isabella', 'Mia', 'Charlotte', 'Abigail', 'Emily', 'Harper', 'Amelia', 'Evelyn', 'Elizabeth', 'Sofia', 'Madison', 'Connor', 'Josiah', 'Jonathan'  , 'Cameron', 'Jeremiah', 'Mateo', 'Adrian', 'Hudson', 'Robert', 'Nicholas', 'Brayden', 'Nolan', 'Easton' , 'Jordan', 'Colton']
 
     this.state = {
       emoji: [ '💊' ,'🔑', '🎥' , '⚖️' ,'💐 ',' 🍖' , '🐣' , '☘️ ' , '👞' , '🍎 ' , '🥕' , ' 🍩 ' , '🥨 ' , '🧀' , '🏈 ' , '🎭 ' , '🎯' , '🎳', '🚕', '🚒' , '✈️' , '🛠' , '💌' ],
@@ -38,13 +38,20 @@ class App extends Component {
       exchangeButton : false,
       voteButton: false, 
 
-
+      joinButton: false
     }
 
     this.handleInteraction = this.handleInteraction.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
     this.handleVote = this.handleVote.bind(this);
+    this.handleStatistics = this.handleStatistics.bind(this);
   } 
+
+  handleStatistics() {
+    this.setState({monitorVisible: true, exchangeVisible: false})
+    document.getElementById('log-btn').classList.remove('main-btn')
+  }
+
 
   handleVote (e) {
     e.target.classList.remove('main-btn')
@@ -55,14 +62,14 @@ class App extends Component {
       let start;
       for (var i=0; i< 18; i++ ){
         let newSpan = document.createElement("p");
-        newSpan.innerHTML = '📃';
+        newSpan.innerHTML = '☑️';
         voteBox.appendChild(newSpan);
         newSpan.classList.add('vote-paper');
 
         start = document.getElementById('contract-item').getBoundingClientRect();
         newSpan.style.position = 'absolute';
-        newSpan.style.top = start.top+'px';
-        newSpan.style.left = start.left+'px';
+        newSpan.style.top = start.top+start.height*0.7+'px';
+        newSpan.style.left = start.left+start.width*0.7+'px';
       }
 
       let polls = Array.from(document.getElementsByClassName('vote-paper'))
@@ -79,7 +86,7 @@ class App extends Component {
       window.setTimeout(()=> {
         for (let i=0;i<18;i++) {
           let curPoll = polls[i];
-          curPoll.innerHTML = i === 5 || i===8 || i===12 || i ===15 ? '🅾️' : '✅' ;
+          curPoll.innerHTML = '✅' ;
         }
       }, 1300)
 
@@ -88,11 +95,12 @@ class App extends Component {
           let curPoll = polls[i], whom = whoVote[i];
           let target = whom.getBoundingClientRect();
           curPoll.style.transition= 'all '+ 0.8 +'s';
-          curPoll.style.top = start.top+'px';
-          curPoll.style.left = start.left+'px';
+          curPoll.style.top = start.top+start.height*0.7+'px';
+          curPoll.style.left = start.left+start.width*0.7+'px';
         }
-        this.setState({exchangeButton: true })
-        document.getElementById('exchange-btn').classList.add('main-btn')
+        this.setState({exchangeButton: true});
+        document.getElementById('exchange-btn').classList.add('main-btn');
+
       }, 3000)
 
 
@@ -100,14 +108,14 @@ class App extends Component {
   }
 
   handleCreate () {
+    
+    let items = ['📚 🖌 description of item', '💰💎  description of item', '☀️ ❄️ description of item', '🌍 ☘️ description of item', '🍎🥕 description of item', '🛠 🚒 description of item ', '💊 ⚖️ description of item' , '💐 🔑 description of item' , '✈️ 🚕  description of item' , '🎭 🎯 description of item']
     this.setState({createVisible: true, bannerVisible: false });
-    Array.from(document.getElementsByClassName('main-btn'))[0].classList.remove('main-btn')
+    Array.from(document.getElementsByClassName('main-btn'))[0].classList.remove('main-btn');
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min) + min)
     } 
-
-    let items = ['📚 🖌 description of item', '💰💎  description of item', '☀️ ❄️ description of item', '🌍 ☘️ description of item', '🍎🥕 description of item', '🛠 🚒 description of item ', '💊 ⚖️ description of item' , '💐 🔑 description of item' , '✈️ 🚕  description of item' , '🎭 🎯 description of item']
-
+    
     let count = 0;
     window.setTimeout( () => {
       let target = document.getElementById('contract-item').getBoundingClientRect(); 
@@ -129,8 +137,8 @@ class App extends Component {
         
         setTimeout(() => {
           curissue.style.transition= 'all '+ 0.8 +'s';
-          curissue.style.left = (target.left)+'px';
-          curissue.style.top = (target.top)  +'px';
+          curissue.style.left = (target.left+target.width*0.3)+'px';
+          curissue.style.top = (target.top+target.height*0.3)  +'px';
         }, 80)
 
 
@@ -159,9 +167,9 @@ class App extends Component {
   }
 
   handleInteraction () {
-
+    
     this.setState({exchangeVisible: true , voteVisible: false, createVisible:false})
-
+    
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min) + min)
     }
@@ -206,22 +214,22 @@ class App extends Component {
 
       emoji.innerHTML = sendItem;
       coin.style.position = "absolute";
-      coin.style.left = (positionFrom.left)+'px'; 
-      coin.style.top = (positionFrom.top)  +'px'; 
+      coin.style.left = (positionFrom.left- positionFrom.width*0.1) +'px'; 
+      coin.style.top = (positionFrom.top - positionTo.height/2) +'px'; 
       coin.style.visibility = 'visible';
       
       setTimeout(() => {
         coin.style.transition= 'all '+ 1 +'s';
         coin.style.position = "absolute";
-        coin.style.left = (positionTo.left)+'px';
-        coin.style.top = (positionTo.top)  +'px';
+        coin.style.left = (positionTo.left- positionFrom.width*0.1)+'px';
+        coin.style.top = (positionTo.top -  positionTo.height/2)  +'px';
       }, 50)
       
       setTimeout(() => {
         coin.style.visibility = 'hidden';
         coin.style.transition = '';
         emoji.innerHTML = '';
-      }, 900)
+      }, 1100)
 
     }, 2000)
 
@@ -286,9 +294,9 @@ class App extends Component {
 
         <nav className="App-sidebar">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title"> One Neighborhood <br/> New Community</h1>
-          <p>by the people for the people</p>
-
+          <h1 className="App-title"> New World <br/> One Community</h1>
+          <p className='by-the-people'>by the people for the people</p>
+          <br/>  <br/>
           <button 
               className='sidebar-btn main-btn' 
               id='sign-btn'                     
@@ -300,27 +308,37 @@ class App extends Component {
               className='sidebar-btn' 
               id='vote-btn'
               onClick={this.handleVote}   
-              > vote and deploy </button>}
+              > sign and execute </button>}
+
           { this.state.exchangeButton
           && <button 
               className='sidebar-btn' 
               id='exchange-btn' 
               onClick={this.handleInteraction} 
-              > exchange goods and services </button>}
+              > exchange goods & services </button>}
+
           { this.state.monitorButton
           && <button 
               className='sidebar-btn' 
               id = 'log-btn'    
-              > monitor the log of activities </button>}
+              onClick={this.handleStatistics} 
+              > data & statistics </button>}
 
               <br/><br/>
+
+          { this.state.joinButton
+            && <button 
+                className='sidebar-btn' 
+                id = 'join-btn'    
+                > join your community </button>}
 
         </nav>
 
         
         
         <div className="App-content">
-
+        {this.state.monitorVisible 
+        && <iframe src='https://bl.ocks.org/mbostock/raw/7607999/' id='chart'></iframe>} 
 
         { this.state.voteVisible
           && <span id = 'vote-box' > </span>
@@ -336,21 +354,19 @@ class App extends Component {
             && <span className='create-contract-page'> 
                   <span className='first-half'>  {mapContractFirst} </span> <br />
                   <span className='contract-item' id='contract-item'> 
-                      <textarea id = 'text-field' rows ='24' cols ='1' placeholder="Create  Smart  Social  contract  for  your  community by declaring values your hold and defining principles of daily interactions... "> 
-                      </textarea> </span> <br />
+                        <textarea id = 'text-field' rows ='24' cols ='1' placeholder="Create  Smart  Social  contract  for  your  community by declaring values your hold and defining principles of daily interactions... "> 
+                        </textarea> </span>
+                  <br />
                   <span className='second-half'> {mapContractSecond} </span>
                   <span><p id='issue'></p></span>
               </span>}
 
           {this.state.bannerVisible 
             && <span className='banner'> 
-                <p> One world project aims to popularize blockchain and smart contract technologies 
-                  for the processes of community development and maintenance. <br/><br/>
-                  Making it visual and interactive we educate a broad audience of citizens and help people around the globe launch local their initiatives. 
-                  Today smart contracts allow fast and riskless and mutually beneficial business deals. 
-                  Blockchain technologies ensure secure communications and democratic voting.   <br/><br/>
-                  Distributed technologies will help communities to build humanistic societies, where all individual will thrive and live lives on their full potential.<br/><br/>
-                  Spreading the knowledge about how technologies can be applied in the real life, we believe that together we can make a difference in the world. 
+                <p> New world project aims to adopt blockchain and smart contract technologies for community building on the local and global scale. 
+                <br/><br/>By making peer to peer interactions and dealings secure and transparent the participants lead their community with trust and efficacy, outreach and help people around the globe to launch their local initiatives. 
+                <br/>Today smart contracts allow for mutually beneficial transactions and chart the way to new democracy. 
+                <br/><br/>Distributed technologies will help communities to build <br/>humanistic societies - E Pluribus Unum.
                 </p>
               </span>}
         
