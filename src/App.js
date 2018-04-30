@@ -3,15 +3,8 @@ import logo from './logo.svg';
 import toonAvatar from 'cartoon-avatar';
 import './App.css';
 
-import education from './images/education.png';
-import medicine from './images/medicine.png';
-import transport from './images/transport.png';
-import environment from './images/environment.png';
-import culture from './images/culture.png';
-import emergency from './images/emergency.png';
-import police from './images/police.png';
-import construction from './images/construction.png';
-const pictograms = [education, medicine, transport, environment, culture, emergency, police, construction];
+import ethereum from './images/ethereum.png';
+
 
 class App extends Component {
 
@@ -48,8 +41,9 @@ class App extends Component {
   } 
 
   handleStatistics() {
-    this.setState({monitorVisible: true, exchangeVisible: false})
-    document.getElementById('log-btn').classList.remove('main-btn')
+    this.setState({joinButton: true, monitorVisible: true, exchangeVisible: false})
+    document.getElementById('log-btn').classList.remove('main-btn');
+    document.getElementById('join-btn').classList.remove('main-btn')
   }
 
 
@@ -62,7 +56,7 @@ class App extends Component {
       let start;
       for (var i=0; i< 18; i++ ){
         let newSpan = document.createElement("p");
-        newSpan.innerHTML = '☑️';
+        newSpan.innerHTML = '🔐 ';
         voteBox.appendChild(newSpan);
         newSpan.classList.add('vote-paper');
 
@@ -149,7 +143,7 @@ class App extends Component {
           curissue.innerHTML = '';
 
           let testarea = document.getElementById('text-field');
-          testarea.value = item +'\n'+ testarea.value;
+          testarea.value =  testarea.value +'\n'+ item;
         }, 900)
 
       }, 1000)
@@ -167,9 +161,9 @@ class App extends Component {
   }
 
   handleInteraction () {
-    
-    this.setState({exchangeVisible: true , voteVisible: false, createVisible:false})
-    
+    document.getElementById('exchange-btn').classList.remove('main-btn');
+    this.setState({voteVisible: false, createVisible:false})
+    this.setState({exchangeVisible: true})
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min) + min)
     }
@@ -177,7 +171,8 @@ class App extends Component {
     var simulatePeople;
 
     window.setTimeout(() => {
-    simulatePeople = setInterval( () =>  {
+
+      simulatePeople = setInterval( () =>  {
       //--------------------------------------------------  INTERACTION
       const wallets = this.state.wallets;
       let personFrom = getRandomInt(0, wallets.length-1);
@@ -233,13 +228,13 @@ class App extends Component {
 
     }, 2000)
 
-    },300)
+    },100)
 
     window.setTimeout(()=> {
       clearInterval(simulatePeople);
       this.setState({monitorButton: true});
       document.getElementById('log-btn').classList.add('main-btn');
-      document.getElementById('exchange-btn').classList.remove('main-btn');
+
     }, 22000)
 
   }
@@ -338,7 +333,14 @@ class App extends Component {
         
         <div className="App-content">
         {this.state.monitorVisible 
-        && <iframe src='https://bl.ocks.org/mbostock/raw/7607999/' id='chart'></iframe>} 
+        && <span>
+            {/*<img src='https://media0.giphy.com/media/q0J2FTjHKk9nG/giphy.gif' id='chart'/>*/}
+            <img src='https://media.giphy.com/media/BLX7DZmgkT31K/giphy.gif' id='chart'/>
+            <img src='https://media.giphy.com/media/ReScIbs0uIETe/source.gif' id='chart'/>
+            <img src='https://www.pubnub.com/wp-content/uploads/2015/02/687474703a2f2f692e696d6775722e636f6d2f59447964775a692e676966.gif' id='chart'/>
+            {/* <img src='http://i.imgur.com/OQEdgOW.gif' id='chart'/> */}
+            <img src={ethereum} id='eth-log'/>
+            </span>} 
 
         { this.state.voteVisible
           && <span id = 'vote-box' > </span>
@@ -348,6 +350,8 @@ class App extends Component {
           && <span className='people'> 
               {mapPeople} 
               <span id='coin'><p id='emoji'></p></span>
+              <br/>
+              <img src='https://i.giphy.com/media/3oEjHWbXcpeKhTktXi/giphy.webp' id='coding-trade'/>
             </span>}
 
           {this.state.createVisible
@@ -355,7 +359,10 @@ class App extends Component {
                   <span className='first-half'>  {mapContractFirst} </span> <br />
                   <span className='contract-item' id='contract-item'> 
                         <textarea id = 'text-field' rows ='24' cols ='1' placeholder="Create  Smart  Social  contract  for  your  community by declaring values your hold and defining principles of daily interactions... "> 
-                        </textarea> </span>
+                        </textarea> 
+                        {/*  <img src='https://i.giphy.com/media/aQCCNezRpb9Hq/giphy.webp' id='coding'/> */}
+                        <img src='https://i.giphy.com/media/3oEjHWbXcpeKhTktXi/giphy.webp' id='coding-contract'/>
+                  </span>
                   <br />
                   <span className='second-half'> {mapContractSecond} </span>
                   <span><p id='issue'></p></span>
