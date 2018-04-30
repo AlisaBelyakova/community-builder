@@ -38,7 +38,24 @@ class App extends Component {
     this.handleCreate = this.handleCreate.bind(this);
     this.handleVote = this.handleVote.bind(this);
     this.handleStatistics = this.handleStatistics.bind(this);
+    this.handleJoin = this.handleJoin.bind(this);
   } 
+
+  handleJoin () {
+
+    
+    this.setState({      
+      monitorButton: false, 
+      exchangeButton : false,
+      voteButton: false, 
+      joinButton: false,
+      monitorVisible: false,
+      bannerVisible: true 
+    });
+    document.getElementById('create-btn').classList.add('main-btn')
+    
+
+  }
 
   handleStatistics() {
     this.setState({joinButton: true, monitorVisible: true, exchangeVisible: false});
@@ -298,12 +315,12 @@ class App extends Component {
 
         <nav className="App-sidebar">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title"> New World <br/> One Community</h1>
+          <h1 className="App-title"> One World <br/> One Community</h1>
           <p className='by-the-people'>by the people for the people</p>
           <br/>  <br/>
           <button 
               className='sidebar-btn main-btn' 
-              id='sign-btn'                     
+              id='create-btn'                     
               onClick={this.handleCreate}        
               > create social contract </button>
 
@@ -333,7 +350,8 @@ class App extends Component {
           { this.state.joinButton
             && <button 
                 className='sidebar-btn' 
-                id = 'join-btn'    
+                id = 'join-btn' 
+                onClick={this.handleJoin}   
                 > ✔️ sign social contract - join One Community </button>}
 
         </nav>
@@ -357,6 +375,7 @@ class App extends Component {
 
         {this.state.exchangeVisible 
           && <span className='people' id='people'> 
+              <span></span>
               {mapPeople} 
               <span id='coin'><p id='emoji'></p></span>
               <br/>
@@ -379,7 +398,7 @@ class App extends Component {
 
           {this.state.bannerVisible 
             && <span className='banner'> 
-                <p> New World One Community project aims to adopt blockchain and smart contract technologies for community building on the local and global scale. 
+                <p> One World One Community project aims to adopt <br/> blockchain and smart contract technologies <br/>for community building on the local and global scale. 
                 <br/><br/>By making peer to peer interactions and dealings secure and transparent the participants lead their community with trust and efficacy, outreach and help people around the globe to launch their local initiatives. 
                 <br/><br/>Today smart contracts help communities to build democracy and humanistic societies - E Pluribus Unum Nuovo.
                 </p>
