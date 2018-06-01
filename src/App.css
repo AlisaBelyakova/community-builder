@@ -34,7 +34,7 @@ body {
 }
 
 .App-title {
-  font-size: 1.5vw;
+  font-size: 2vw;
   display: inline-block;
   margin: 0 ;
 }
@@ -49,6 +49,7 @@ body {
 }
 
 .by-the-people {
+  font-size: 1vw;
   font-style: italic;
   color: rgba(255, 255, 255, 0.623);
 }
@@ -74,22 +75,29 @@ body {
   padding: 1% 10%;
   align-self: center;
 }
+
+#place-holder {
+  grid-row-start: 1;
+  grid-row-end: span 1;
+  grid-column-start: 1;
+  grid-column-end: span 1;
+}
  
 .main-btn {
-  background-color: #4285F4 !important;
+  background-color: #34A853 !important;
   height: 60px;
 }
 
 .sidebar-btn {
   /* font-weight: bold; */
   font-family: 'Tajawal', sans-serif;
-  background-color: #34A853;
+  background-color: #4285F4;
   margin: 3% auto;
   display: block;
-  height: 60px;
-  width: 200px;
+  height: 70px;
+  width: 230px;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 22px;
   border: none;
 }
 .sidebar-btn:focus {outline:0;}
